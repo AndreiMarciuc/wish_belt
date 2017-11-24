@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        fieldset{
+            display: inline-block;
+            width: 220px;
+            background-color: silver;
+            border-radius: 5px;
+        }
+        h4{
+            margin:9px;
+            padding:0;
+        }
+        .button{
+            height: 25px;
+            background-color: #777;
+            float:right;
+            margin-right:10px;
+            clear:left;
+            border-radius: 5px;
+            font-size: 14px;
+            box-shadow: 3px 3px 4px #888888;
+        }
+        #field{
+            height: 20px;
+            width: 180px;
+            border-radius: 5px;
+            box-shadow: 5px 5px 5px #888888;
+        }
+        #login{
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 80px;
+        }
+        #register{
+            display: inline-block;
+        }
+        #messages{
+            line-height: 5px;
+            font-size: 14px;
+            border: 1px rgb(97, 97, 97) solid;
+            width: 582px;
+            border-radius: 3px;
+        }
+        h1,h2{
+            text-shadow: 5px 5px 5px #888888;
+        }
+    </style>
+</head>
+<body>
+    <fieldset style="width:620px  ">
+        <legend><h1>Welcome!</h1></legend>
+        <div id="messages">
+            {%if messages%}
+                {%for message in messages%}
+                    <p >{{message}}</p>
+                {%endfor%}
+            {%endif%}
+        </div>
+        <div id="register" >
+            <fieldset>
+                <legend><h2>Register</h2></legend> 
+                <form action="/create" method="post">
+                    {%csrf_token%}
+                    <div>
+                        <h4>Name:  <input id="field" type="text" name="name" ></h4>
+                        <h4>Username:  <input id="field" type="text" name="username" ></h4>
+                        <h4>Email:  <input id="field" type="text" name="email"></h4>
+                        <h4>Password:  <input id="field" type="text" name="password" placeholder=" No less than 8 characters"></h4>
+                        <h4>Confirm Password: <input id="field" type="text" name="c_password"></h4>
+                        <h4>Date Hired: <input id="field" type="date" name="bday"></h4>
+                        
+                        <input class="button" type="submit" value="Register">
+                    </div>
+                </form>
+            </fieldset> 
+        </div>
+        <div id="login" >
+            <fieldset >
+                <legend><h2>Login</h2></legend>
+                    <form action="/login" method="post">
+                        {% csrf_token %}
+                        <h4>Email: <input id="field" type="text" name="email" ></h4>
+                        <h4>Password:  <input id="field" type="text" name="password" ></h4>
+                        <input class="button" type="submit" value="Login">
+                    </form>
+            </fieldset>
+        </div>
+        
+    </fieldset>
+    
+</body>
+</html>
